@@ -1,4 +1,4 @@
-# Processamanto Gráfico: Fundamentos 2024-1
+# Processamento Gráfico: Fundamentos 2024-1
 
 Alguns projetos desenvolvidos para as aulas de Processamento Gráfico: Fundamentos dos curso de Ciência da Computação da Unisinos.
 
