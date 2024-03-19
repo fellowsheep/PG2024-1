@@ -40,5 +40,11 @@
     <None Include="..\shaders\helloTriangle.vs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="..\shaders\exercicio8.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\exercicio8.vs">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
