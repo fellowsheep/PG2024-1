@@ -127,6 +127,8 @@
     <None Include="..\shaders\exercicio8.vs" />
     <None Include="..\shaders\helloTriangle.fs" />
     <None Include="..\shaders\helloTriangle.vs" />
+    <None Include="..\shaders\ortho.fs" />
+    <None Include="..\shaders\ortho.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

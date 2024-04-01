@@ -18,6 +18,7 @@
 
 
 using namespace std;
+//using namespace glm; //para não usar glm::
 
 //Classe para manipulação dos shaders
 #include "Shader.h"
@@ -62,7 +63,7 @@ int main()
 	// GLAD: carrega todos os ponteiros d funções da OpenGL
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
+		cout << "Failed to initialize GLAD" << endl;
 
 	}
 
@@ -72,15 +73,9 @@ int main()
 	cout << "Renderer: " << renderer << endl;
 	cout << "OpenGL version supported " << version << endl;
 
-	// Definindo as dimensões da viewport com as mesmas dimensões da janela da aplicação
-	int width, height;
-	glfwGetFramebufferSize(window, &width, &height);
-	glViewport(0, 0, width, height);
-
-
 	// Compilando e buildando o programa de shader
 	//Shader shader("../shaders/helloTriangle.vs", "../shaders/helloTriangle.fs");
-	Shader shader("../shaders/exercicio8.vs", "../shaders/exercicio8.fs");
+	Shader shader("../shaders/ortho.vs", "../shaders/ortho.fs");
 
 	// Gerando um buffer simples, com a geometria de um triângulo
 	//GLuint VAO = exercicio5();
@@ -92,12 +87,22 @@ int main()
 	//GLint colorLoc = glGetUniformLocation(shader.ID, "inputColor");
 	
 	shader.Use();
+
+	//Matriz de projeção paralela ortográfica
+	glm::mat4 projection = glm::ortho(-5.0,5.0,-5.0,5.0,-1.0,1.0);
+	//Enviando para o shader a matriz como uma var uniform
+	shader.setMat4("projection", glm::value_ptr(projection));
 	
 	// Loop da aplicação - "game loop"
 	while (!glfwWindowShouldClose(window))
 	{
 		// Checa se houveram eventos de input (key pressed, mouse moved etc.) e chama as funções de callback correspondentes
 		glfwPollEvents();
+
+		// Definindo as dimensões da viewport com as mesmas dimensões da janela da aplicação
+		int width, height;
+		glfwGetFramebufferSize(window, &width, &height);
+		glViewport(0, 0, width, height); //unidades de tela: pixel
 
 		// Limpa o buffer de cor
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f); //cor de fundo
