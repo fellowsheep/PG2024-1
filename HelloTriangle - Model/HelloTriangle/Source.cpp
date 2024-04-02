@@ -90,7 +90,7 @@ int main()
 	shader.Use();
 
 	//Matriz de projeção paralela ortográfica
-	glm::mat4 projection = glm::ortho(-1.0,1.0,-1.0,1.0,-1.0,1.0);
+	glm::mat4 projection = glm::ortho(0.0,800.0,0.0,600.0,-1.0,1.0);
 	//Enviando para o shader a matriz como uma var uniform
 	shader.setMat4("projection", glm::value_ptr(projection));
 	
@@ -103,26 +103,18 @@ int main()
 		// Definindo as dimensões da viewport com as mesmas dimensões da janela da aplicação
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
-		//glViewport(0, 0, width, height); //unidades de tela: pixel
-		//Resolução do exercicio 4 da lista 2
-		//glViewport(width / 2, height / 2, width / 2, height / 2); //unidades de tela: pixel
-
+		glViewport(0, 0, width, height); //unidades de tela: pixel
+		
 		// Limpa o buffer de cor
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f); //cor de fundo
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glLineWidth(10);
 		glPointSize(20);
-
-		//Resolução de parte do exercicio 5 lista 2
-		//Primeira viewport (quadrante inferior esquerdo)
-		glViewport(0, 0, width / 2, height / 2); //unidades de tela: pixel
+		
+		//Chamadas de desenho da cena
 		drawScene(VAO);
 
-		//Segunda viewport (quadrante superior direito)
-		glViewport(width / 2, height / 2, width / 2, height / 2); //unidades de tela: pixel
-		drawScene(VAO);
-	
 		// Troca os buffers da tela
 		glfwSwapBuffers(window);
 	}
@@ -203,13 +195,13 @@ int exercicio5()
 	GLfloat vertices[] = {
 		//x   y     z
 		//Triangulo 0
-		-0.5, 0.5, 0.0, //v0
-		 0.0, 0.0, 0.0, //v1
-		 0.5, 0.5, 0.0, //v2 
+		-0.5 * 300 + 400, 0.5 + 300, 0.0, //v0
+		 0.0 + 400, 0.0 + 300, 0.0, //v1
+		 0.5 + 400, 0.5 + 300, 0.0, //v2 
 		//Triangulo 1
-		 0.0, 0.0, 0.0, //v3
-		-0.5,-0.5, 0.0, //v4
-		 0.5,-0.5, 0.0, //v5 
+		 0.0 + 400, 0.0 + 300, 0.0, //v3
+		-0.5 + 400,-0.5 + 300, 0.0, //v4
+		 0.5 + 400,-0.5 + 300, 0.0, //v5 
 	};
 
 	GLuint VBO, VAO;
@@ -254,13 +246,13 @@ int exercicio8()
 	GLfloat vertices[] = {
 		//x   y     z    r   g    b
 		//Triangulo 0
-		-0.5, 0.5, 0.0, 1.0, 0.0, 0.0,//v0
-		 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,//v1
-		 0.5, 0.5, 0.0, 0.0, 0.0, 1.0,//v2 
+		-0.5 * 300 + 400, 0.5 * 300 + 300, 0.0, 1.0, 0.0, 0.0,//v0
+		 0.0 * 300 + 400, 0.0 * 300 + 300, 0.0, 0.0, 1.0, 0.0,//v1
+		 0.5 * 300 + 400, 0.5 * 300 + 300, 0.0, 0.0, 0.0, 1.0,//v2 
 		//Triangulo 1
-		 0.0, 0.0, 0.0, 1.0, 1.0, 0.0,//v3
-		-0.5,-0.5, 0.0, 0.0, 1.0, 1.0,//v4
-		 0.5,-0.5, 0.0, 1.0, 0.0, 1.0,//v5 
+		 0.0 * 300 + 400, 0.0 * 300 + 300, 0.0, 1.0, 1.0, 0.0,//v3
+		-0.5 * 300 + 400,-0.5 * 300 + 300, 0.0, 0.0, 1.0, 1.0,//v4
+		 0.5 * 300 + 400,-0.5 * 300 + 300, 0.0, 1.0, 0.0, 1.0,//v5 
 	};
 
 	GLuint VBO, VAO;
