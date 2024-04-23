@@ -119,9 +119,11 @@
     <ClCompile Include="..\..\Dependencies\stb_image\stb_image.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\include\Shader.h" />
+    <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\shaders\tex.fs" />
