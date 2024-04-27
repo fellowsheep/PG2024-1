@@ -13,6 +13,15 @@ void Sprite::inicializar(GLuint texID, glm::vec3 pos, glm::vec3 escala, float an
 	this->escala = escala;
 	this->angulo = angulo;
 
+	isJumping = false;
+	onGround = true;
+
+	jumpVel.x = 0.0;
+	jumpVel.y = 0.5;
+	vel = 5.0;
+
+
+
 	// Aqui setamos as coordenadas x, y e z do triângulo e as armazenamos de forma
 	// sequencial, já visando mandar para o VBO (Vertex Buffer Objects)
 	// Cada atributo do vértice (coordenada, cores, coordenadas de textura, normal, etc)
@@ -83,9 +92,19 @@ void Sprite::desenhar()
 	glBindVertexArray(0); //unbind
 }
 
-void Sprite::moveRight()
+void Sprite::moverParaDireita()
 {
-	pos.x += 3.0;
+	pos.x += vel;
+	if (escala.x < 0.0)
+		escala.x = -escala.x;
+	
+}
+
+void Sprite::moverParaEsquerda()
+{
+	pos.x -=vel;
+	if (escala.x > 0.0)
+		escala.x = -escala.x;
 }
 
 void Sprite::cair()
@@ -103,6 +122,40 @@ void Sprite::cair()
 
 void Sprite::atualizar()
 {
+	if (pos.y >= 500 && isJumping) //altura máxima
+	{
+		isJumping = false;
+	}
+	//atualizar pulo
+	if (isJumping)
+	{
+		pos.x = pos.x + jumpVel.x * vel;
+		pos.y = pos.y + jumpVel.y * vel;
+
+		
+	}
+	else {
+		if (pos.y <= 150.0 && !onGround)
+		{
+			pos.y = 150.0;
+			onGround = true;
+		}
+		else
+		{
+			if (!onGround)
+				pos.y -= jumpVel.y * vel; 
+
+		}
+		if (pos.y >= 300 && isJumping) //altura máxima
+		{
+			isJumping = false;
+		}
+	}
+
+	
+
+
+
 	glm::mat4 model = glm::mat4(1); //matriz identidade
 	model = glm::translate(model, pos);
 	model = glm::rotate(model, glm::radians(angulo), glm::vec3(0.0, 0.0, 1.0));

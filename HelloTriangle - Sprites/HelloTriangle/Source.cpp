@@ -166,10 +166,37 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	{
+		if (!spr.getJumping())
+		{
+			spr.setJumping(true);
+			spr.setOnGround(false);
+		}
+	}
+	if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
+	{
+		spr.setJumping(false);
+		spr.setJumpVel(glm::vec2(0.0, 0.5));
+	}
+
 	if (key == GLFW_KEY_D || key == GLFW_KEY_RIGHT)
 	{
-		spr.moveRight();
+		spr.moverParaDireita();
+		if (spr.getJumping())
+		{
+			spr.setJumpVel(glm::vec2(0.5, 0.5)); //45 graus
+		}
 	}
+	if (key == GLFW_KEY_A || key == GLFW_KEY_LEFT)
+	{
+		spr.moverParaEsquerda();
+		if (spr.getJumping())
+		{
+			spr.setJumpVel(glm::vec2(-0.5, 0.5)); //-45 graus
+		}
+	}
+	
 }
 
 
