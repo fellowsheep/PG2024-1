@@ -36,5 +36,8 @@ protected:
 	glm::vec2 jumpVel;
 	float vel;
 
+	float lastTime; 
+	float FPS;
+
 };
 
